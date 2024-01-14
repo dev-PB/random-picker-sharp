@@ -4,6 +4,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Formats.Asn1.AsnWriter;
 
 namespace RandomPickerSharp
 {
@@ -37,6 +38,35 @@ namespace RandomPickerSharp
         public static string[] GetPlayerNames()
         {
             return GetNameList("Enter player names:", 2);
+        }
+
+        public static void OutputSongInfo(string url, string playerName)
+        {
+            Console.WriteLine($"Next song: {url}\nPicked by: {playerName}");
+        }
+
+        public static bool GetYesOrNo(string message)
+        {
+            Console.WriteLine(message);
+            string? input = Console.ReadLine()?.Trim().ToUpper();
+
+            switch (input)
+            {
+                case "YES":
+                case "Y":
+                        return true;
+                case "NO":
+                case "N":
+                        return false;
+                default:
+                    return GetYesOrNo(message);
+            }
+        }
+
+        public static void PrintScoreBoard(int correctGuesses, int totalSongs, List<string> scores)
+        {
+            Console.WriteLine($"{correctGuesses} out of {totalSongs} songs were guessed correctly.");
+            scores.ForEach(i => Console.WriteLine(i));
         }
     }
 }

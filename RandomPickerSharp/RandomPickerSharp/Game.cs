@@ -11,6 +11,7 @@ namespace RandomPickerSharp
     {
         public List<Player> Players { get; set; }
         public List<Song> Songs { get; set; } = new List<Song>();
+        public int CorrectGuessesOverall = 0;
 
         public Game()
         {
@@ -21,6 +22,7 @@ namespace RandomPickerSharp
         {
             this.loadSongs();
             this.pickSongs();
+            this.displayResults();
         }
 
         public List<Player> loadPlayers()
@@ -47,17 +49,46 @@ namespace RandomPickerSharp
                 Guid[] unpickedSongIds = Songs.Where(i => !i.HasBeenPicked).Select(i => i.SongId).ToArray();
                 Guid pickedSongId = unpickedSongIds[rng.Next(unpickedSongIds.Count())];
                 Song? pickedSong = this.Songs.Find(i => i.SongId == pickedSongId);
+                Player? player = this.Players.Find(i => i.PlayerId == pickedSong?.PickedByPlayerId);
 
-                if (pickedSong == null)
+                if (pickedSong == null || player == null)
                 {
                     throw new Exception("Failed to pick song");
                 }
 
                 pickedSong.HasBeenPicked = true;
-                Console.WriteLine(pickedSong.Url);
-                Console.ReadLine();
 
+                IO.OutputSongInfo(pickedSong.Url.ToString(), player.Name);
+                if (IO.GetYesOrNo("Did they guess correctly?"))
+                {
+                    CorrectGuessesOverall++;
+                    player.CorrectGuesses++;
+                }
             }
+        }
+
+        public void displayResults()
+        {
+            List<string> scores = this.Players
+                .OrderByDescending(i => i.CorrectGuesses)
+                .Select(i => $"{i.Name,10} {getScoreString(i.PlayerId),-7}")
+                .ToList();
+
+            IO.PrintScoreBoard(CorrectGuessesOverall, Songs.Count, scores);
+        }
+
+        public string getScoreString(Guid playerId)
+        {
+            Player? player = this.Players.Find(i => i.PlayerId == playerId);
+
+            if (player == null)
+            {
+                throw new Exception("Couldn't find player");
+            }
+
+            double amountOfSongs = this.Songs.Where(i => i.PickedByPlayerId == player.PlayerId).Count();
+            double percent = ((double)player.CorrectGuesses / amountOfSongs) * 100;
+            return $"{player.CorrectGuesses} ({percent.ToString("0.##")}%)";
         }
     }
 }
