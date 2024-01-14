@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace RandomPickerSharp
+﻿namespace RandomPickerSharp
 {
     public class Game
     {
@@ -82,7 +75,7 @@ namespace RandomPickerSharp
         {
             List<string> scores = this.Players
                 .OrderByDescending(i => i.CorrectGuesses)
-                .Select(i => $"{i.Name,10} {getScoreString(i.PlayerId),-7}")
+                .Select(i => $"{i.Name,10} {getScoreString(i.PlayerId), -7}")
                 .ToList();
 
             IO.PrintScoreBoard(CorrectGuessesOverall, Songs.Count, scores);
@@ -99,7 +92,7 @@ namespace RandomPickerSharp
 
             double amountOfSongs = this.Songs.Where(i => i.PickedByPlayerId == player.PlayerId).Count();
             double percent = ((double)player.CorrectGuesses / amountOfSongs) * 100;
-            return $"{player.CorrectGuesses} ({percent.ToString("0.##")}%)";
+            return $"{player.CorrectGuesses}/{amountOfSongs} ({percent.ToString("0.##")}%)";
         }
     }
 }
