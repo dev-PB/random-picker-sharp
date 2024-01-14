@@ -9,13 +9,13 @@ namespace RandomPickerSharp
     public class Player
     {
         public string Name { get; set; }
+        public Guid PlayerId { get; set; }
         public int CorrectGuesses { get; set; } = 0;
-        public List<Song> Songs { get; set; }
-        public bool HasUnpickedSongs => this.Songs.Any(i => !i.HasBeenPicked);
 
         public Player(string name)
         {
             this.Name = name;
+            PlayerId = Guid.NewGuid();
         }
     }
 }
