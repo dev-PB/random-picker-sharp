@@ -23,15 +23,20 @@ namespace RandomPickerSharp
             return userInput.Split(",");
         }
 
-        public static string[] GetPlayerNames()
+        public static string[] GetNameList(string message, int minimumAmount)
         {
             string[] names;
             do
             {
-                names = GetCommaSeparatedList("Enter player names:");
-            } while (names.Length < 2);
+                names = GetCommaSeparatedList(message);
+            } while (names.Length < minimumAmount);
 
             return names;
+        }
+
+        public static string[] GetPlayerNames()
+        {
+            return GetNameList("Enter player names:", 2);
         }
     }
 }

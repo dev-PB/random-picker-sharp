@@ -8,19 +8,31 @@ namespace RandomPickerSharp
 {
     public class Game
     {
-        public List<Player> Players { get; set; } = new List<Player>();
+        public List<Player>? Players { get; set; }
 
         public void Run()
         {
             this.loadPlayers();
+            this.loadSongs();
         }
 
         public void loadPlayers()
         {
             string[] names = IO.GetPlayerNames();
-            foreach (string name in names)
+            Players = names.Select(i => new Player(i)).ToList();
+        }
+
+        public void loadSongs()
+        {
+            if (Players == null || Players.Count < 2)
             {
-                Players.Add(new Player(name));
+                throw new Exception("Players list not initialized");
+            }
+
+            foreach (Player player in Players)
+            {
+                string[] songUrls = IO.GetNameList($"Enter song URLs for {player.Name}", 1);
+                player.Songs = songUrls.Select(i => new Song(i)).ToList();
             }
         }
     }
