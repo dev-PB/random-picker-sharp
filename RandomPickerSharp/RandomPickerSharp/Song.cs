@@ -27,11 +27,17 @@ namespace RandomPickerSharp
 
             if (openUrl)
             {
-                Process.Start(new ProcessStartInfo
+                try
                 {
-                    FileName = Url.ToString(),
-                    UseShellExecute = true
-                });
+                    Process.Start(new ProcessStartInfo
+                    {
+                        FileName = Url.ToString(),
+                        UseShellExecute = true
+                    });
+                } catch (Exception ex)
+                {
+                    Console.WriteLine($"An error occured when attempting to open url {Url.ToString()}\n{ex.Message}");
+                }
             }
         }
     }
