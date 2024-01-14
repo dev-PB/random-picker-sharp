@@ -35,9 +35,17 @@ namespace RandomPickerSharp
 
         public void loadSongs()
         {
+            int? songsPerPlayer = null;
+
             foreach (Player player in Players)
             {
-                string[] songUrls = IO.GetNameList($"Enter song URLs for {player.Name}", 1);
+                var songUrls = IO.GetUris(player.Name, songsPerPlayer);
+
+                if (!songsPerPlayer.HasValue)
+                {
+                    songsPerPlayer = songUrls.Count;
+                }
+
                 Songs.AddRange(songUrls.Select(i => new Song(i, player.PlayerId)));
             }
         }

@@ -14,9 +14,9 @@ namespace RandomPickerSharp
         public Guid PickedByPlayerId { get; set; }
         public bool HasBeenPicked { get; set; } = false;
 
-        public Song(string url, Guid pickedByPlayerId)
+        public Song(Uri url, Guid pickedByPlayerId)
         {
-            this.Url = new Uri(url);
+            this.Url = url;
             PickedByPlayerId = pickedByPlayerId;
             SongId = Guid.NewGuid();
         }
