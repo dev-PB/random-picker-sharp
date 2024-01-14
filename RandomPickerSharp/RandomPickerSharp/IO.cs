@@ -82,10 +82,10 @@
             {
                 case "YES":
                 case "Y":
-                        return true;
+                    return true;
                 case "NO":
                 case "N":
-                        return false;
+                    return false;
                 default:
                     return GetYesOrNo(message);
             }
@@ -95,7 +95,6 @@
         {
             Console.WriteLine($"{correctGuesses} out of {totalSongs} songs were guessed correctly.");
             scores.ForEach(i => Console.WriteLine(i));
-            Console.ReadLine(); // Wait for input before continuing
         }
 
         public static void WriteStartup()
