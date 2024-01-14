@@ -14,7 +14,7 @@ namespace RandomPickerSharp
 
         public Player(string name)
         {
-            this.Name = name;
+            this.Name = name.Trim();
             PlayerId = Guid.NewGuid();
         }
     }
