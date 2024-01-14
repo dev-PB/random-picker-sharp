@@ -100,7 +100,7 @@
         public static void WriteStartup()
         {
             Console.WriteLine("Random-Picker");
-            Console.WriteLine("Made by Ryan W (https://github.com/onlinePB)");
+            Console.WriteLine("Made by Ryan W (https://github.com/dev-PB)");
             Console.WriteLine();
             Console.WriteLine("This code and software is without license, and thus under exclusive copyright to me. I mean I don't know why you'd want to copy, modify or redistribute this anyway, surely you've got better options?");
             Console.WriteLine("For more information: https://choosealicense.com/no-permission/");
