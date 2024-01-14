@@ -11,10 +11,12 @@ namespace RandomPickerSharp
     {
         public List<Player> Players { get; set; }
         public List<Song> Songs { get; set; } = new List<Song>();
-        public int CorrectGuessesOverall = 0;
+        public int CorrectGuessesOverall { get; set; } = 0;
+        public bool ShouldOpenUrls { get; set; } = false;
 
         public Game()
         {
+            this.ShouldOpenUrls = IO.GetYesOrNo("Open URLs automatically?");
             this.Players = this.loadPlayers();
         }
 
@@ -56,7 +58,7 @@ namespace RandomPickerSharp
                     throw new Exception("Failed to pick song");
                 }
 
-                pickedSong.HasBeenPicked = true;
+                pickedSong.PickSong(ShouldOpenUrls);
 
                 IO.OutputSongInfo(pickedSong.Url.ToString(), player.Name);
                 if (IO.GetYesOrNo("Did they guess correctly?"))
