@@ -16,6 +16,7 @@ namespace RandomPickerSharp
 
         public Game()
         {
+            IO.WriteStartup();
             this.ShouldOpenUrls = IO.GetYesOrNo("Open URLs automatically?");
             this.Players = this.loadPlayers();
         }

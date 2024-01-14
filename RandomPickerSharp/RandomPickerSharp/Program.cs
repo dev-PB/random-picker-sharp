@@ -4,7 +4,11 @@
     {
         static void Main(string[] args)
         {
-            new Game().Play();
+            do
+            {
+                Console.Clear();
+                new Game().Play();
+            } while (IO.GetYesOrNo("Play again?"));
         }
     }
 }

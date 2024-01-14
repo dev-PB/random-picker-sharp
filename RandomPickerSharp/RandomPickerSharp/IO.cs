@@ -104,6 +104,17 @@ namespace RandomPickerSharp
         {
             Console.WriteLine($"{correctGuesses} out of {totalSongs} songs were guessed correctly.");
             scores.ForEach(i => Console.WriteLine(i));
+            Console.ReadLine(); // Wait for input before continuing
+        }
+
+        public static void WriteStartup()
+        {
+            Console.WriteLine("Random-Picker");
+            Console.WriteLine("Made by Ryan W (https://github.com/onlinePB)");
+            Console.WriteLine();
+            Console.WriteLine("This code and software is without license, and thus under exclusive copyright to me. I mean I don't know why you'd want to copy, modify or redistribute this anyway, surely you've got better options?");
+            Console.WriteLine("For more information: https://choosealicense.com/no-permission/");
+            Console.WriteLine();
         }
     }
 }
