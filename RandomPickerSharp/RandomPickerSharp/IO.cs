@@ -75,7 +75,7 @@
 
         public static bool GetYesOrNo(string message)
         {
-            Console.WriteLine(message);
+            Console.WriteLine(message + " [Y/n]");
             string? input = Console.ReadLine()?.Trim().ToUpper();
 
             switch (input)
