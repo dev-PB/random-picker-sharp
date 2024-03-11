@@ -65,7 +65,7 @@
 
         public static string[] GetPlayerNames()
         {
-            return GetNameList("Enter player names:", 2);
+            return GetNameList("Enter player names (e.g. 'John, Steve, Mike'):", 2);
         }
 
         public static void OutputSongInfo(string url, string playerName)
